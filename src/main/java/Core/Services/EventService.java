@@ -15,15 +15,16 @@ public class EventService implements EventServiceInterface {
 
     public Event createEvent(String name, String location, LocalDateTime time, int ticketsAvailable) throws EventException {
         UUID newID = UUID.randomUUID();
-        events.put(newID, new Event(newID, name, location, time, ticketsAvailable));
-        return new Event(newID, name, location, time, ticketsAvailable);
+        Event newEvent = new Event(newID, name, location, time, ticketsAvailable);
+        events.put(newID, newEvent);
+        return new Event(newEvent);
     }
 
     @Override
     public Event getEventById(UUID id) {
         if(events.containsKey(id)) {
             Event event = events.get(id);
-            return new Event(event.getId(), event.getName(), event.getLocation(), event.getTime(), event.getTicketsAvailable().intValue());
+            return new Event(event);
         }
         else {
             throw EventException.eventDoesNotExist();
