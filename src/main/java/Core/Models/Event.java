@@ -29,6 +29,14 @@ public class Event {
         this.ticketsAvailable = new AtomicInteger(ticketsAvailable);
     }
 
+    public Event(Event eventToCopy) {
+        this.id = eventToCopy.getId();
+        this.name = new String(eventToCopy.getName());
+        this.location = new String(eventToCopy.getLocation());
+        this.time = eventToCopy.getTime();
+        this.ticketsAvailable = new AtomicInteger(eventToCopy.getTicketsAvailable().get());
+    }
+
     public UUID getId() {
         return id;
     }
